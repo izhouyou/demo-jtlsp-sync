@@ -1,5 +1,9 @@
 package com.izhouy.template.config;
 
+import com.izhouy.template.factory.HandlerFactory;
+import com.izhouy.template.service.KafkaConsumerService;
+import com.izhouy.template.service.SendMessageService;
+import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 
 /**
@@ -13,4 +17,13 @@ import org.springframework.stereotype.Component;
 @Component
 public class StrategicFactoryBeanConfig {
 
+    @Bean
+    public HandlerFactory<String, KafkaConsumerService> kafkaConsumerServiceFactory() {
+        return new HandlerFactory<>(KafkaConsumerService.class);
+    }
+
+    @Bean
+    public HandlerFactory<String, SendMessageService> sendMessageServiceHandlerFactory() {
+        return new HandlerFactory<>(SendMessageService.class);
+    }
 }
